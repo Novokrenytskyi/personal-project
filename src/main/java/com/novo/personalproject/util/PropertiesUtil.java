@@ -1,16 +1,16 @@
 package com.novo.personalproject.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.io.IOException;
 import java.util.Properties;
 
+@UtilityClass
 public final class PropertiesUtil {
     private static final Properties PROPERTIES = new Properties();
 
     static {
         loadProperties();
-    }
-
-    private PropertiesUtil() {
     }
 
     public static String get(String key) {

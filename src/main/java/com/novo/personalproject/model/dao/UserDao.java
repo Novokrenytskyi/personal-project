@@ -168,7 +168,8 @@ public class UserDao {
                 user.getLastName(),
                 user.getGender().name(),
                 user.getAge(),
-                user.getRole().name());
+                user.getRole().name(),
+                user.getId());
     }
 
 //    public boolean delete(Long id) {

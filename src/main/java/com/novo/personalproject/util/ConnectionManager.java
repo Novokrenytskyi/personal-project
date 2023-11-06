@@ -1,16 +1,16 @@
 package com.novo.personalproject.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+@UtilityClass
 public final class ConnectionManager {
     private static final String USERNAME_KEY = "spring.datasource.username";
     private static final String PASSWORD_KEY = "spring.datasource.password";
     private static final String URL_KEY = "spring.datasource.url";
 
-    private ConnectionManager() {
-    }
 
     public static Connection open() {
        try {

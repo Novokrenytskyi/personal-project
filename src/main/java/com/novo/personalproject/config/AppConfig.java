@@ -9,19 +9,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 
 import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = "com.novo.personalproject")
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 public class AppConfig {
+
     @Bean
-    public DataSource dataSource(@Value("${spring.datasource.driver-class-name}") String driver,
+    HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+    }
+
+    @Bean
+    public DataSource dataSource(@Value("${spring.datasource.driverClassName}") String driver,
                                  @Value("${spring.datasource.url}") String url,
                                  @Value("${spring.datasource.username}") String username,
                                  @Value("${spring.datasource.password}") String pass) {
+
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(driver);
         dataSource.setUrl(url);
