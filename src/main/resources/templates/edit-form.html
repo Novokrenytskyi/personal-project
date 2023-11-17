@@ -6,6 +6,7 @@
 </head>
 <body>
 <form th:method="PATCH" th:action="@{'/users/'+ ${user.getId()}}" th:object="${user}">
+
   <label for="firstName">Name:</label>
   <input type="text" id="firstName" name="firstName" th:field="*{firstName}" />
 
@@ -16,8 +17,13 @@
 
   <br>
 
-  <label for="age">Age:</label>
-  <input type="number" id="age" name="age" th:field="*{age}" />
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email" th:field="*{email}">
+
+  <br>
+
+  <label for="birthDate">Birthdate:</label>
+  <input type="date" id="birthDate" name="birthDate" th:field="*{birthDate}" />
 
   <br>
 

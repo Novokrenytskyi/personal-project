@@ -1,6 +1,5 @@
 package com.novo.personalproject.config;
 
-import com.novo.personalproject.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,27 +21,6 @@ public class AppConfig {
     @Bean
     HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
-    }
-
-    @Bean
-    public DataSource dataSource(@Value("${spring.datasource.driverClassName}") String driver,
-                                 @Value("${spring.datasource.url}") String url,
-                                 @Value("${spring.datasource.username}") String username,
-                                 @Value("${spring.datasource.password}") String pass) {
-
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(pass);
-
-        return dataSource;
-    }
-
-    @Bean
-    @Autowired
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
     }
 
 }

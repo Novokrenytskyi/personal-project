@@ -5,9 +5,10 @@
     <title>User</title>
 </head>
 <body>
+<p th:text="${user.getEmail()}"/>
 <p th:text="${user.getFirstName()}"/>
 <p th:text="${user.getLastName()}"/>
-<p th:text="${user.getAge()}"/>
+<p th:text="${user.getBirthDate()}"/>
 <p th:text="${user.getGender()}"/>
 <p th:text="${user.getRole()}"/>
 
@@ -23,5 +24,10 @@
         <button type="submit">Delete</button>
     </form>
 
+<br>
+
+<a th:href="@{'/users'}">
+    <button>Users</button>
+</a>
 </body>
 </html>
