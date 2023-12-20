@@ -5,12 +5,16 @@
     <title>User</title>
 </head>
 <body>
-<p th:text="${user.getEmail()}"/>
-<p th:text="${user.getFirstName()}"/>
-<p th:text="${user.getLastName()}"/>
-<p th:text="${user.getBirthDate()}"/>
-<p th:text="${user.getGender()}"/>
-<p th:text="${user.getRole()}"/>
+<div th:insert="~{fragment::header}"></div>
+
+<br>
+
+<p> Email: <span th:text="${user.email}"></span></p>
+<p> Name: <span th:text="${user.firstName}"></span></p>
+<p> Last name: <span th:text="${user.lastName}"></span></p>
+<p> Birthdate: <span th:text="${user.birthDate}"></span></p>
+<p> Gender: <span th:text="${user.gender}"></span></p>
+<p> Role: <span th:text="${user.role}"></span></p>
 
 <br>
 

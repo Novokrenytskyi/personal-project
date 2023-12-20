@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Face</title>
+</head>
+<body>
+<h1>Personal project</h1>
+<div th:insert="~{fragment::header}"></div>
+<div th:insert="~{fragment::profile}"></div>
+<div th:insert="~{fragment::login}"></div>
+<br><br>
+<a th:href="@{/face/products}">
+  <button>Products</button>
+</a><br><br>
+
+</body>
+</html>

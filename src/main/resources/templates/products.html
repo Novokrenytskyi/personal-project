@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products page</title>
+</head>
+<body>
+<h1>Products</h1>
+<div th:insert="~{fragment::header}"></div>
+<div th:insert="~{fragment::profile}"></div>
+<div th:insert="~{fragment::login}"></div>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="productDto : ${dtoPage.content}">
+        <td>
+            <a th:href="@{/face/products/{id}(id=${productDto.id})}" th:text="${productDto.name}">Product details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <ul style="list-style-type: none; display: inline">
+        <li th:each="i : ${#numbers.sequence(0, dtoPage.totalPages - 1)}" style="display: inline;">
+            <a th:href="@{/face/products(page=${i})}" th:text="${i}">Page 1</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

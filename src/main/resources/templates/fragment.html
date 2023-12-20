@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragment</title>
+</head>
+<body>
+<div th:fragment="header">
+    <form th:action="@{/logout}" method="POST">
+        <span th:text="${#authentication.name}">Email</span>
+        <button type="submit">Logout</button>
+    </form>
+</div>
+<div th:fragment="profile">
+    <a th:href="@{/face/profile}" >
+        <button>Profile</button>
+    </a>
+</div>
+<div th:fragment="login">
+<a th:href="@{/face/login}" >
+    <button>Login</button>
+</a>
+</div>
+</body>
+</html>

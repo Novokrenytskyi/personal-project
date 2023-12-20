@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = "com.novo.personalproject")
 @PropertySource("classpath:application.yml")
 public class AppConfig {
-
     @Bean
     HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
