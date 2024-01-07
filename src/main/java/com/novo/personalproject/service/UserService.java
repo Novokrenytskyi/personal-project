@@ -2,8 +2,10 @@ package com.novo.personalproject.service;
 
 import com.novo.personalproject.dao.UserRepository;
 import com.novo.personalproject.dto.UserCreateEditDto;
+import com.novo.personalproject.dto.UserEditDto;
 import com.novo.personalproject.dto.UserReadDto;
 import com.novo.personalproject.mapper.UserCreateEditMapper;
+import com.novo.personalproject.mapper.UserEditDtoMapper;
 import com.novo.personalproject.mapper.UserReadMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private final UserCreateEditMapper userCreateEditMapper;
 
+    @Autowired
+    private final UserEditDtoMapper userEditDtoMapper;
+
     public List<UserReadDto> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
@@ -42,6 +47,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id)
                 .map(userReadMapper::map);
     }
+
 
     @Transactional
     public UserReadDto saveUser(UserCreateEditDto userCreateEditDto) {
@@ -85,5 +91,13 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email)
                 .map(userReadMapper::map);
 
+    }
+
+    @Transactional
+    public Optional<UserReadDto> updateProfile(Long id, UserEditDto userEditDto) {
+        return userRepository.findById(id)
+                .map(entity -> userEditDtoMapper.map(userEditDto, entity))
+                .map(userRepository::saveAndFlush)
+                .map(userReadMapper::map);
     }
 }

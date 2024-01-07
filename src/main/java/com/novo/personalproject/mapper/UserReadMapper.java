@@ -27,6 +27,7 @@ public class UserReadMapper implements Mapper<User, UserReadDto> {
                 .gender(object.getGender())
                 .birthDate(object.getBirthDate())
                 .role(object.getRole())
+                .shoppingCartId(object.getShoppingCart().getId())
                 .orders(orders)
                 .build();
     }

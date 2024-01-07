@@ -27,6 +27,8 @@ public class UserReadDto {
 
     Role role;
 
+    Long shoppingCartId;
+
     @Builder.Default
     List<OrderReadDto> orders = new ArrayList<>();
 }

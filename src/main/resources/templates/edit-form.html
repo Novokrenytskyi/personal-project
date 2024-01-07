@@ -5,7 +5,7 @@
     <title>Edit form</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{'/users/'+ ${user.getId()}}" th:object="${user}">
+<form th:method="PATCH" th:action="@{'/face/users/'+ ${user.getId()}}" th:object="${user}">
 
   <label for="firstName">Name:</label>
   <input type="text" id="firstName" name="firstName" th:field="*{firstName}" />
@@ -35,15 +35,20 @@
 
   <br>
 
-  <label for="role">Role:</label>
+  <!--<label for="role">Role:</label>
   <select id="role" name="role">
     <option value="ADMIN">Admin</option>
     <option value="USER">User</option>
-  </select>
+  </select>-->
 
   <br>
 
   <button type="submit">Update</button>
+  <div th:if="${errors}">
+    <p style="color: red" th:each="error: ${errors}" th:text="${error.defaultMessage}">
+      Error message
+    </p>
+  </div>
 </form>
 </body>
 </html>

@@ -18,7 +18,7 @@
 
 <br>
 
-<a th:href="@{'/users/' + ${user.getId()} + '/edit'}">
+<a th:href="@{'/face/users/' + ${user.getId()} + '/edit'}">
     <button>Edit user</button>
     </a>
 
@@ -32,6 +32,11 @@
 
 <a th:href="@{'/users'}">
     <button>Users</button>
+</a>
+<br>
+
+<a th:href="@{'/face/shopping-cart/' + ${user.getShoppingCartId()}}">
+    <button>Shopping cart</button>
 </a>
 </body>
 </html>

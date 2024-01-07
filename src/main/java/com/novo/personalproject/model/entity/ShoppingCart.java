@@ -11,8 +11,8 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "products")
-@EqualsAndHashCode(exclude = "products")
+@ToString(exclude = {"products", "user"})
+@EqualsAndHashCode(exclude = {"products", "user"})
 @Entity
 @Builder
 public class ShoppingCart {
@@ -20,7 +20,8 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Builder.Default

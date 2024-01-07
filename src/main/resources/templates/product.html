@@ -9,11 +9,12 @@
 <p>Description: <span th:text="${productDto.description}"></span></p>
 <p>Price: <span th:text="${productDto.price}"></span></p>
 
-<form th:action="@{/add_to_cart}" method="post">
-    <input type="hidden"  name="productId" th:value="${productDto.id}">
+<form th:action="@{/face/shopping-cart/edit}" method="POST">
+    <input type="hidden"  name="id" th:value="${productDto.id}">
     <label for="quantity">Quantity:</label>
     <input type="number" id="quantity" name="quantity" min="1" value="1">
     <input type="submit" value="Add to Cart">
 </form>
+<div style="color: green" th:if="${successMessage}" th:text="${successMessage}"></div>
 </body>
 </html>

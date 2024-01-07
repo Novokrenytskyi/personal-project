@@ -42,7 +42,7 @@ public class User  {
 
     private String password;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ShoppingCart shoppingCart;
 
     @Builder.Default

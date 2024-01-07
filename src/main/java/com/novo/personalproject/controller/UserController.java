@@ -1,6 +1,7 @@
 package com.novo.personalproject.controller;
 
 import com.novo.personalproject.dto.UserCreateEditDto;
+import com.novo.personalproject.dto.UserEditDto;
 import com.novo.personalproject.dto.UserReadDto;
 import com.novo.personalproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +75,20 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public String editUser(@PathVariable long id, @ModelAttribute("user") @Validated UserCreateEditDto user) {
-       return userService.updateUser(id, user)
-               .map(it -> "redirect:/users/{id}")
+    public String editUser(@PathVariable Long id, @ModelAttribute("user") @Validated UserEditDto user,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes) {
+
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("user", user);
+            return "redirect:/face/users/{id}/edit";
+        }
+
+        System.out.println(user.getFirstName());
+
+       return userService.updateProfile(id, user)
+               .map(it -> "redirect:/face/profile")
                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
     }
