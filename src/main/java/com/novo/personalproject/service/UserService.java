@@ -1,12 +1,15 @@
 package com.novo.personalproject.service;
 
+import com.novo.personalproject.dao.ShoppingCartRepository;
 import com.novo.personalproject.dao.UserRepository;
 import com.novo.personalproject.dto.UserCreateEditDto;
 import com.novo.personalproject.dto.UserEditDto;
 import com.novo.personalproject.dto.UserReadDto;
+import com.novo.personalproject.error.EmailAlreadyExistsException;
 import com.novo.personalproject.mapper.UserCreateEditMapper;
 import com.novo.personalproject.mapper.UserEditDtoMapper;
 import com.novo.personalproject.mapper.UserReadMapper;
+import com.novo.personalproject.model.entity.ShoppingCart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -37,6 +40,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private final UserEditDtoMapper userEditDtoMapper;
 
+    @Autowired
+    private final ShoppingCartRepository shoppingCartRepository;
+
     public List<UserReadDto> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
@@ -50,12 +56,21 @@ public class UserService implements UserDetailsService {
 
 
     @Transactional
-    public UserReadDto saveUser(UserCreateEditDto userCreateEditDto) {
+    public  Optional<UserReadDto> saveUser(UserCreateEditDto userCreateEditDto) throws EmailAlreadyExistsException {
+        if(userRepository.findByEmail(userCreateEditDto.getEmail()).isPresent()) {
+            String message = String.format("Email %s already exists", userCreateEditDto.getEmail());
+            throw new EmailAlreadyExistsException(message);
+        }
 
-        return Optional.of(userCreateEditDto).map(userCreateEditMapper::map)
+        ShoppingCart newShoppingCart = new ShoppingCart();
+        com.novo.personalproject.model.entity.User newUser = userCreateEditMapper.map(userCreateEditDto);
+
+        newUser.setShoppingCart(newShoppingCart);
+        newShoppingCart.setUser(newUser);
+
+        return Optional.ofNullable(newUser)
                 .map(userRepository::save)
-                .map(userReadMapper::map)
-                .orElseThrow();
+                .map(userReadMapper::map);
     }
 
     @Transactional

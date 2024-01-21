@@ -30,7 +30,6 @@ public class ShoppingCartService {
     private final ProductRepository productRepository;
 
 
-
     public Map<Product, Integer> getShoppingCartProducts(Long id) {
         ShoppingCart shoppingCart = shoppingCartRepository.findById(id).orElse(null);
         if (shoppingCart != null) {
@@ -44,9 +43,9 @@ public class ShoppingCartService {
     }
 
     @Transactional
-    public void updateSoppingCart(Integer id, Integer quantity, String userName) {
+    public void updateSoppingCart(Integer productId, Integer quantity, String userName) {
 
-        Product product = productRepository.findById(id).orElse(null);
+        Product product = productRepository.findById(productId).orElse(null);
         User user = userRepository.findByEmail(userName).orElse(null);
 
         if(product != null && user != null) {
@@ -74,7 +73,7 @@ public class ShoppingCartService {
         }
     }
     @Transactional
-    public boolean removeProduct(Integer productId, Long shoppingCartId) {
+    public void removeProduct(Integer productId, Long shoppingCartId) {
         ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId).orElse(null);
         Product productToRemove = productRepository.findById(productId).orElse(null);
 
@@ -85,7 +84,5 @@ public class ShoppingCartService {
 
         shoppingCart.setProducts(filteredProducts);
         shoppingCartRepository.saveAndFlush(shoppingCart);
-
-        return true;
     }
 }

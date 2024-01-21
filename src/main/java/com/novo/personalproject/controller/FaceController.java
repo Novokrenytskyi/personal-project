@@ -1,12 +1,10 @@
 package com.novo.personalproject.controller;
 
-import com.novo.personalproject.dto.UserReadDto;
 import com.novo.personalproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +22,7 @@ public class FaceController {
         return "face";
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping("/login")
     public String loginPage() {
         return "login";
     }

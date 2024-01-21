@@ -1,17 +1,10 @@
 package com.novo.personalproject.mapper;
 
 import com.novo.personalproject.dto.UserEditDto;
-import com.novo.personalproject.model.entity.Gender;
-import com.novo.personalproject.model.entity.Order;
-import com.novo.personalproject.model.entity.Role;
 import com.novo.personalproject.model.entity.User;
-import jakarta.validation.constraints.Email;
-import lombok.Builder;
+
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 @Component
 public class UserEditDtoMapper implements Mapper<UserEditDto, User> {
 

@@ -3,6 +3,7 @@ package com.novo.personalproject.controller;
 import com.novo.personalproject.dto.UserCreateEditDto;
 import com.novo.personalproject.dto.UserEditDto;
 import com.novo.personalproject.dto.UserReadDto;
+import com.novo.personalproject.error.EmailAlreadyExistsException;
 import com.novo.personalproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,9 +33,11 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String getUsers(Model model) {
         List<UserReadDto> users = userService.getAllUsers();
-        model.addAttribute("users", users);
 
-        return "users";
+        if(users != null) {
+            model.addAttribute("users", users);
+            return "users";
+        } else throw  new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
@@ -60,8 +64,16 @@ public class UserController {
             return "redirect:/face/users/registration";
         }
 
-        userService.saveUser(userCreateEditDto);
-        return "redirect:/face/login";
+        try {
+            userService.saveUser(userCreateEditDto);
+        } catch (EmailAlreadyExistsException ex) {
+            bindingResult.addError(new ObjectError("userCreateEditDto", ex.getMessage()));
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("user", userCreateEditDto);
+            return "redirect:/face/users/registration";
+        }
+        System.out.println("controller after saveUser");
+        return "success";
     }
 
     @GetMapping("/{id}/edit")
@@ -84,8 +96,6 @@ public class UserController {
             redirectAttributes.addFlashAttribute("user", user);
             return "redirect:/face/users/{id}/edit";
         }
-
-        System.out.println(user.getFirstName());
 
        return userService.updateProfile(id, user)
                .map(it -> "redirect:/face/profile")

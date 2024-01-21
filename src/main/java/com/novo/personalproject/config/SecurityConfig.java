@@ -1,15 +1,12 @@
 package com.novo.personalproject.config;
 
-import com.novo.personalproject.service.CustomOAuth2UserService;
 import com.novo.personalproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -35,9 +32,6 @@ public class SecurityConfig {
     @Autowired
     private final UserService userService;
 
-   /* @Autowired
-    private final CustomOAuth2UserService oAuth2UserService;*/
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -45,7 +39,7 @@ public class SecurityConfig {
         http
 
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/face", "/face/users/registration", "/face/products", "/face/login", "/login").permitAll()
+                        .requestMatchers("/face", "/face/users/registration", "/face/products", "/face/login", "/login", "/success").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
