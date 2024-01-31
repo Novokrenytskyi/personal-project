@@ -1,6 +1,5 @@
 package com.novo.personalproject.annotation;
 
-import com.novo.personalproject.config.AppConfig;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import java.lang.annotation.ElementType;

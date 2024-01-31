@@ -8,7 +8,7 @@ spring:
       properties.hibernate:
          show_sql: true
          format_sql: true
-         hbm2ddl.auto: update
+         hbm2ddl.auto: validate
       open-in-view: false
    mvc:
      format:
@@ -26,6 +26,14 @@ spring:
                authorization-grant-type: authorization_code
                client-name: Google
                client-authentication-method: client_secret_post
+
+springdoc:
+   swagger-ui:
+      oauth:
+         client-id: 886982415727-tvhlqfa23nbr2igj81vctpjqajetu8ke.apps.googleusercontent.com
+         client-secret: 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
+         scopes: openid,email,profile
+         oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
 
 
 logging:

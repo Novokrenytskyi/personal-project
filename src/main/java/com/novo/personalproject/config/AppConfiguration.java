@@ -9,9 +9,8 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 
 @Configuration
-@ComponentScan(basePackages = "com.novo.personalproject")
 @PropertySource("classpath:application.yml")
-public class AppConfig {
+public class AppConfiguration {
     @Bean
     HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();

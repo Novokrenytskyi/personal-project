@@ -3,20 +3,16 @@ package com.novo.personalproject.config;
 import com.novo.personalproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.lang.reflect.Method;
@@ -25,9 +21,9 @@ import java.util.Set;
 
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity()
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfiguration {
 
     @Autowired
     private final UserService userService;
@@ -39,9 +35,14 @@ public class SecurityConfig {
         http
 
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/face", "/face/users/registration", "/face/products", "/face/login", "/login", "/success").permitAll()
+                        .requestMatchers("/face", "/face/users/registration",
+                                "/face/products", "/face/login",
+                                "/login", "/success",
+                                "/v3/api-docs/**", "/swagger-ui/**",
+                                "/static/css/**").permitAll()
                         .anyRequest().authenticated()
                 )
+
                 .formLogin(login -> login
                         .loginPage("/face/login")
                         .defaultSuccessUrl("/face")
@@ -67,7 +68,7 @@ public class SecurityConfig {
 
             Set<Method> userDetailsMethods = Set.of(UserDetails.class.getMethods());
 
-            return (OidcUser) Proxy.newProxyInstance(SecurityConfig.class.getClassLoader(),
+            return (OidcUser) Proxy.newProxyInstance(SecurityConfiguration.class.getClassLoader(),
                     new Class[]{UserDetails.class, OidcUser.class},
                     (proxy, method, args) -> userDetailsMethods.contains(method)
                             ? method.invoke(userDetails, args)
