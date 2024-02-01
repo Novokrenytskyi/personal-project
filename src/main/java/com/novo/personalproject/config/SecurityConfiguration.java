@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                                 "/face/products", "/face/login",
                                 "/login", "/success",
                                 "/v3/api-docs/**", "/swagger-ui/**",
-                                "/static/css/**").permitAll()
+                                "/resources/static/css/main.css").permitAll()
                         .anyRequest().authenticated()
                 )
 
