@@ -10,7 +10,7 @@
 <p>Price: <span th:text="${productDto.price}"></span></p>
 
 <form th:action="@{/face/shopping-cart/edit}" method="POST">
-    <input type="hidden"  name="id" th:value="${productDto.id}">
+    <input type="hidden" name="id" th:value="${productDto.id}">
     <label for="quantity">Quantity:</label>
     <input type="number" id="quantity" name="quantity" min="1" value="1">
     <input type="submit" value="Add to Cart">

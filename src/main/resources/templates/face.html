@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <title>Face</title>
     <link  type="text/css" th:href="@{resources/static/css/main.css}" rel="stylesheet" >
+    <script th:src="@{resources/static/js/test.js}" defer></script>
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('myButton').addEventListener('click', myApp.showAlert);
+        });
+    </script>
 </head>
 <body>
 <h1>Personal project</h1>
+<button id="myButton">Click me</button>
+
 <div th:insert="~{fragment::header}"></div>
 <div th:insert="~{fragment::profile}"></div>
 <div th:insert="~{fragment::login}"></div>
