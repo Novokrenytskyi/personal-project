@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Face</title>
-    <link  type="text/css" th:href="@{resources/static/css/main.css}" rel="stylesheet" >
+    <link type="text/css" th:href="@{resources/static/css/main.css}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script th:src="@{resources/static/js/test.js}" defer></script>
-    <script type="application/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('myButton').addEventListener('click', myApp.showAlert);
-        });
-    </script>
 </head>
 <body>
-<h1>Personal project</h1>
-<button id="myButton">Click me</button>
-
-<div th:insert="~{fragment::header}"></div>
-<div th:insert="~{fragment::profile}"></div>
-<div th:insert="~{fragment::login}"></div>
-<br><br>
-<a th:href="@{/face/products}">
-    <button>Products</button>
-</a><br><br>
+<div class="wrapper container">
+    <header class="header" th:insert="~{fragment::header}"></header>
+    <main class="page page__face"></main>
+    <footer class="footer" th:insert="~{fragment::footer}"></footer>
+</div>
 </body>
 </html>

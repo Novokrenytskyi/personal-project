@@ -5,16 +5,30 @@
     <title>Fragment</title>
 </head>
 <body>
-<div th:fragment="header">
-    <form class="logout-fragment" th:action="@{/logout}" method="POST">
-        <span class="logout-fragment__email" th:text="${#authentication.name}">Email</span>
-        <button class="button logout-fragment__button" type="submit">Logout</button>
-    </form>
-</div>
-<a class="button button__profile" th:fragment="profile" th:href="@{/face/profile}">Profile</a>
-<a class="button button__login" th:fragment="login" th:href="@{/face/login}">Login</a>
+
+
 <div th:fragment="main">
-<a th:href="@{/face}">Main page</a>
+    <a th:href="@{/face}">Main page</a>
 </div>
+
+<div th:fragment="header" class="header__wrapper">
+    <form class="header__logout-form logout-form" th:action="@{/logout}" method="POST">
+        <span class="logout-form__email" th:text="${#authentication.name}">Email</span>
+        <button class="button logout-form__button" type="submit">Logout</button>
+    </form>
+    <div class="header__button-box">
+        <a class="button button__profile" th:href="@{/face/profile}">Profile</a>
+        <a class="button button__login" th:href="@{/face/login}">Login</a>
+    </div>
+</div>
+
+<div class="footer__wrapper" th:fragment="footer">
+    <p class="footer__text">lorem loremloremlorem loremlorem lorem lorem loremloremlorem</p>
+    <div class="footer__link-box">
+        <a class="footer__link" href="/">123</a>
+        <a class="footer__link" href="/">123</a>
+    </div>
+</div>
+<div class="wrapper"></div>
 </body>
 </html>
