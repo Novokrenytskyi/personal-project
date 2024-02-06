@@ -1,12 +1,7 @@
-var myApp = myApp || {};
+import { headerModule } from "./header.module.mjs"
 
-myApp.showAlert = function() {
-    alert('Hello from test.js!');
-};
+function main() {
+    headerModule();
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Page is fully loaded. You can perform additional actions here.');
-
-    // Вызываем функцию showAlert после загрузки страницы
-    myApp.showAlert();
-});
+main();
