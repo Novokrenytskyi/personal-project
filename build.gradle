@@ -30,7 +30,6 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation 'org.springframework.data:spring-data-envers'
 	implementation 'org.liquibase:liquibase-core'
-	implementation "org.springdoc:springdoc-openapi-ui:${versions.springdoc}"
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 

@@ -33,7 +33,10 @@ springdoc:
          client-id: 886982415727-tvhlqfa23nbr2igj81vctpjqajetu8ke.apps.googleusercontent.com
          client-secret: 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
          scopes: openid,email,profile
-         oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
+      oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
+      path: /swagger-ui.html
+
+
 
 
 logging:
