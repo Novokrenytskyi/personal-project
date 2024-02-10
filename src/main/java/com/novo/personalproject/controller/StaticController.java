@@ -48,6 +48,24 @@ public class StaticController {
         }
     }
 
+    @GetMapping("/media/{variablePart}")
+    public ResponseEntity<String> getMediaFile(@PathVariable String variablePart) throws IOException {
+        ClassPathResource resource = new ClassPathResource("static/media/" + variablePart);
+
+        if (resource.exists()) {
+            byte[] mediaBytes = Files.readAllBytes(Path.of(resource.getURI()));
+            String MediaContent = new String(mediaBytes);
+
+            String mediaFormat = variablePart.split("\\.")[1];
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.valueOf("image/" + mediaFormat))
+                    .body(MediaContent);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
 
 
