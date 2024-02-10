@@ -36,7 +36,7 @@ public class UserController {
 
         if(users != null) {
             model.addAttribute("users", users);
-            return "users";
+            return "page/users";
         } else throw  new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
@@ -51,7 +51,7 @@ public class UserController {
 
     @GetMapping("/registration")
     public String registration(@ModelAttribute("user") UserCreateEditDto user) {
-        return "registration";
+        return "page/registration";
     }
 
     @PostMapping ("/registration")
@@ -73,7 +73,7 @@ public class UserController {
             return "redirect:/face/users/registration";
         }
         System.out.println("controller after saveUser");
-        return "success";
+        return "page/success";
     }
 
     @GetMapping("/{id}/edit")
@@ -81,7 +81,7 @@ public class UserController {
         return userService.findUserById(id).
                 map(user -> {
                     model.addAttribute("user", user);
-                    return "edit-form";
+                    return "page/edit-form";
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
     }

@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Optional;
-
 @Controller
 @RequestMapping("/face/products")
 public class ProductController {
@@ -34,13 +32,13 @@ public class ProductController {
         model.addAttribute("dtoPage" ,dtoPage);
         boolean authenticated = securityContext.getAuthentication().isAuthenticated();
         System.out.println(authenticated);
-        return "products";
+        return "page/products";
     }
 
     @GetMapping("/{id}")
     public String getProduct(Model model, @PathVariable(name = "id") Integer id) {
         ProductReadDto productDto = productService.findProductById(id).get();
         model.addAttribute("productDto", productDto);
-        return "product";
+        return "page/product";
     }
 }

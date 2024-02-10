@@ -38,7 +38,7 @@ public class ShoppingCartController {
 
         model.addAttribute("productDto", productDto);
         model.addAttribute("successMessage", "Product successfully added to cart");
-        return "product";
+        return "page/product";
     }
 
     @GetMapping("/{id}")
@@ -46,7 +46,7 @@ public class ShoppingCartController {
         model.addAttribute("products", shoppingCartService.getShoppingCartProducts(id));
         model.addAttribute("id", id);
 
-        return "shopping-cart";
+        return "page/shopping-cart";
     }
 
     @PostMapping("/remove")

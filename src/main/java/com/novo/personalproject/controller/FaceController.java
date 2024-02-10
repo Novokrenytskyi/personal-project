@@ -19,12 +19,12 @@ public class FaceController {
 
     @GetMapping
     public String facePage() {
-        return "face";
+        return "page/face";
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "page/login";
     }
 
     @GetMapping("/profile")
