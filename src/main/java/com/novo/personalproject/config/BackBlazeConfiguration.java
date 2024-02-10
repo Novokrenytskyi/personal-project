@@ -1,9 +1,7 @@
+/*
 package com.novo.personalproject.config;
 
-import com.backblaze.b2.client.B2StorageClient;
-import com.backblaze.b2.client.B2StorageClientFactory;
-import com.backblaze.b2.client.exceptions.B2Exception;
-import com.backblaze.b2.client.structures.B2Bucket;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,3 +31,4 @@ public class BackBlazeConfiguration {
         return b2StorageClient.getBucketOrNullByName(bucketName);
     }
 }
+*/
