@@ -18,13 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 
+/*
 @Service
 @RequiredArgsConstructor
 public class BackBlazeService {
     @Autowired
     private final B2StorageClient b2StorageClient;
 
-    /*public String uploadFile(MultipartFile file) throws IOException {
+    public String uploadFile(MultipartFile file) throws IOException {
 
         try (InputStream inputStream = file.getInputStream()) {
             B2Bucket bucketOrNullByName = b2StorageClient.getBucketOrNullByName("personal-project-images");
@@ -50,5 +51,6 @@ public class BackBlazeService {
         } catch (B2Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 }
+*/
