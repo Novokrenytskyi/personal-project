@@ -32,7 +32,7 @@ public class FaceController {
        return userService.findUserByEmail(userDetails.getUsername())
                 .map(user -> {
                     model.addAttribute("user", user);
-                    return "user";
+                    return "page/user";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

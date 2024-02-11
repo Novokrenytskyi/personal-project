@@ -3,34 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link  type="text/css" th:href="@{resources/static/css/main.css}" rel="stylesheet" >
+    <link type="text/css" href="/resources/static/css/reset.css" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/common.css" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/login.page.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="module" src="/resources/static/js/login.page.js" defer></script>
+
+
 </head>
-<body>
-<h1 class="face-h1"> FACE LOGIN</h1>
-<form th:action="@{/face/login}" method="post">
-    <div style="color: red" th:if="${param.error}">
-        Bad credentials
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out
-    </div>
-    <label for="username">Email:
-        <input id="username" name="username" type="text">
-    </label><br>
-    <label for="password">Password:
-        <input id="password" name="password" type="password">
-    </label><br>
-    <button type="submit">Login</button>
-</form>
-<div>
-    <div>Login with:</div>
-    <a href="/oauth2/authorization/google">Google</a>
+<body class="load">
+<div class="wrapper container">
+    <header class="header" th:insert="~{fragment/header::header}"></header>
+    <main class="page page__login login-page">
+        <div class="login-page__wrapper">
+            <div class="auth-form">
+                <form class="login-form" th:action="@{/face/login}" method="post">
+                    <div class="form-field">
+                        <label class="form-field__label" for="username">Email:</label>
+                        <input class="form-field__input" id="username" name="username" type="email">
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-field__label" for="password">Password:</label>
+                        <input class="form-field__input" id="password" name="password" type="password">
+                    </div>
+
+                    <div class="error-message" th:if="${param.error}">
+                        Bad credentials
+                    </div>
+
+                    <div class="logout-message" th:if="${param.logout}">
+                        You have been logged out
+                    </div>
+
+                    <button class="submit-button" type="submit">Login</button>
+                </form>
+                <button class="social-login-button" type="button">Login with Google</button>
+                <button class="registration-button" type="button">Registration</button>
+            </div>
+
+        </div>
+    </main>
+    <footer class="footer" th:insert="~{fragment/footer::footer}"></footer>
 </div>
-<form th:href="@{/oauth2/authorization/google}">
-    <button type="submit">Login with Google</button>
-</form>
-<form th:action="@{/face/users/registration}">
-    <button type="submit">Registration</button>
-</form>
+<div class="loader"></div>
 </body>
 </html>

@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Face</title>
-    <link type="text/css" th:href="@{resources/static/css/main.css}" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/reset.css" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/common.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <script type="module" th:src="@{resources/static/js/main.js}" defer></script>
+    <script type="module" src="/resources/static/js/main.js" defer></script>
 </head>
-<body>
+<body class="load">
 <div class="wrapper container">
     <header class="header" th:insert="~{fragment/header::header}"></header>
     <main class="page page__face"></main>
     <footer class="footer" th:insert="~{fragment/footer::footer}"></footer>
 </div>
+<div class="loader"></div>
 </body>
 </html>

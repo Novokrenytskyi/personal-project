@@ -11,7 +11,8 @@ spring:
          hbm2ddl.auto: validate
       open-in-view: false
    mvc:
-     format:
+      static-path-pattern: /**
+      format:
         date: iso
 
    security:
