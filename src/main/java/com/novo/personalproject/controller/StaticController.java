@@ -1,6 +1,9 @@
 package com.novo.personalproject.controller;
 
+import com.novo.personalproject.service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,8 @@ import java.nio.file.Path;
 @Controller
 @RequestMapping("/resources/static")
 public class StaticController {
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/css/{variablePart}")
     public ResponseEntity<String> getCss(@PathVariable String variablePart) throws IOException {
@@ -49,10 +54,17 @@ public class StaticController {
     }
 
     @GetMapping("/media/{variablePart}")
-    public ResponseEntity<String> getMediaFile(@PathVariable String variablePart) throws IOException {
+    public ResponseEntity<byte[]> getMediaFile(@PathVariable String variablePart) throws IOException {
         ClassPathResource resource = new ClassPathResource("static/media/" + variablePart);
 
-        if (resource.exists()) {
+        return imageService.get(variablePart)
+                .map(content -> ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE)
+                .contentLength(content.length)
+                .body(content))
+                .orElseGet(ResponseEntity.notFound()::build);
+
+        /*if (resource.exists()) {
             byte[] mediaBytes = Files.readAllBytes(Path.of(resource.getURI()));
             String MediaContent = new String(mediaBytes);
 
@@ -63,7 +75,7 @@ public class StaticController {
                     .body(MediaContent);
         } else {
             return ResponseEntity.notFound().build();
-        }
+        }*/
     }
 
 }
