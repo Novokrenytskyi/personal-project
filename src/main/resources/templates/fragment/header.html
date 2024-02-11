@@ -1,11 +1,12 @@
 <div th:fragment="header" class="header__wrapper">
+    <a href="/face">Home</a>
+    <div class="header__button-box">
+        <a class="button button__profile" href="/face/profile">Profile</a>
+        <a class="button button__login" th:href="@{/face/login}">Login</a>
+        <a class="button button__products" th:href="@{/face/products}">Products</a>
+    </div>
     <form class="header__logout-form logout-form" th:action="@{/logout}" method="POST">
         <span class="logout-form__email" th:text="${#authentication.name}">Email</span>
         <button class="button logout-form__button" type="submit">Logout</button>
     </form>
-    <div class="header__button-box">
-        <a class="button button__profile" th:href="@{/face/profile}">Profile</a>
-        <a class="button button__login" th:href="@{/face/login}">Login</a>
-        <a class="button button__products" th:href="@{/face/products}">Products</a>
-    </div>
 </div>

@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Products page</title>
+    <link type="text/css" href="/resources/static/css/reset.css" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/common.css" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/products.page.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="module" src="/resources/static/js/products.page.js" defer></script>
 </head>
-<body>
-<h1>Products</h1>
-<div th:insert="~{fragment::header}"></div>
-<div th:insert="~{fragment::profile}"></div>
-<div th:insert="~{fragment::login}"></div>
-<br>
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="productDto : ${dtoPage.content}">
-        <td>
-            <a th:href="@{/face/products/{id}(id=${productDto.id})}" th:text="${productDto.name}">Product details</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<div>
-    <ul style="list-style-type: none; display: inline">
-        <li th:each="i : ${#numbers.sequence(0, dtoPage.totalPages - 1)}" style="display: inline;">
-            <a th:href="@{/face/products(page=${i})}" th:text="${i}">Page 1</a>
-        </li>
-    </ul>
+<body class="load">
+<div class="wrapper container">
+    <header class="header" th:insert="~{fragment/header::header}"></header>
+    <main class="page page__products">
+        <table class="product-table">
+            <thead>
+            <tr>
+                <th class="table-header">Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="productDto : ${dtoPage.content}" class="table-row">
+                <td class="table-cell">
+                    <a class="product-link" th:href="@{/face/products/{id}(id=${productDto.id})}"
+                       th:text="${productDto.name}">Product details</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            <ul class="pagination-list">
+                <li th:each="i : ${#numbers.sequence(0, dtoPage.totalPages - 1)}" class="pagination-item">
+                    <a class="pagination-link" th:href="@{/face/products(page=${i})}" th:text="${i}">Page 1</a>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+    <footer class="footer" th:insert="~{fragment/footer::footer}"></footer>
 </div>
+<div class="loader"></div>
 </body>
 </html>
