@@ -1,9 +1,7 @@
 package com.novo.personalproject.controller;
 
-import com.novo.personalproject.service.ImageService;
+import com.novo.personalproject.service.StaticService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,61 +10,50 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
+
 
 @Controller
 @RequestMapping("/resources/static")
 public class StaticController {
+
     @Autowired
-    private ImageService imageService;
+    private StaticService staticService;
 
-    @GetMapping("/css/{variablePart}")
-    public ResponseEntity<String> getCss(@PathVariable String variablePart) throws IOException {
-        ClassPathResource resource = new ClassPathResource("static/css/" + variablePart);
+    @GetMapping("/css/{fileName:.+\\.css}")
+    public ResponseEntity<String> getCss(@PathVariable String fileName) {
 
-        if (resource.exists()) {
-            byte[] cssBytes = Files.readAllBytes(Path.of(resource.getURI()));
-            String cssContent = new String(cssBytes);
-
-            return ResponseEntity.ok()
-                    .contentType(MediaType.valueOf("text/css"))
-                    .body(cssContent);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return staticService.get("css/" + fileName)
+                .map(content -> ResponseEntity
+                        .status(HttpStatus.OK)
+                        .contentType(MediaType.valueOf("text/css"))
+                        .body(new String(content)))
+                .orElseGet(ResponseEntity.notFound()::build);
     }
 
-    @GetMapping("/js/{variablePart}")
-    public ResponseEntity<String> getJavaScript(@PathVariable String variablePart) throws IOException {
-        ClassPathResource resource = new ClassPathResource("static/js/" + variablePart);
+    @GetMapping("/js/{fileName:.+\\.js|.+\\.mjs}")
+    public ResponseEntity<String> getJavaScript(@PathVariable String fileName) {
 
-        if (resource.exists()) {
-            byte[] jsBytes = Files.readAllBytes(Path.of(resource.getURI()));
-            String JavaScriptContent = new String(jsBytes);
+        return staticService.get("js/" + fileName)
+                .map(content -> ResponseEntity
+                        .status(HttpStatus.OK)
+                        .contentType(MediaType.valueOf("text/javascript"))
+                        .body(new String(content)))
+                .orElseGet(ResponseEntity.notFound()::build);
 
-            return ResponseEntity.ok()
-                    .contentType(MediaType.valueOf("text/javascript"))
-                    .body(JavaScriptContent);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
     }
 
-    @GetMapping("/media/{variablePart:.+}")
-    public ResponseEntity<byte[]> getMediaFile(@PathVariable String variablePart) throws IOException {
-        ClassPathResource resource = new ClassPathResource("static/media/" + variablePart);
+    @GetMapping("/media/{fileName:.+\\.png}")
+    public ResponseEntity<byte[]> getMediaFile(@PathVariable String fileName) {
 
-        if (resource.exists() && resource.isReadable()) {
-            byte[] content = Files.readAllBytes(resource.getFile().toPath());
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_PNG);
-            headers.setContentLength(content.length);
-            return new ResponseEntity<>(content, headers, HttpStatus.OK);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return staticService.get("media/" + fileName)
+                .map(content -> ResponseEntity
+                        .status(HttpStatus.OK)
+                        .contentType(MediaType.IMAGE_PNG)
+                        .contentLength(content.length)
+                        .body(content))
+                .orElseGet(ResponseEntity.notFound()::build);
+
     }
 
 
