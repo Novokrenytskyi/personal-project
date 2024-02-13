@@ -3,36 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
+    <link type="text/css" href="/resources/static/css/reset.css" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/common.css" rel="stylesheet">
+    <link type="text/css" href="/resources/static/css/registration.page.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="module" src="/resources/static/js/registration.page.js" defer></script>
 </head>
 <body>
-<form th:action="@{/face/users/registration}" th:method="POST" th:object="${user}">
-    <label for="email">Email:
-        <input id="email" type="text" name="email" th:value="*{email}">
-    </label><br>
-    <label for="password">Password:
-        <input id="password" type="password" name="password" th:value="*{password}">
-    </label><br>
-    <label for="firstName">Name:
-        <input id="firstName" type="text" name="firstName" th:value="*{firstName}">
-    </label><br>
-    <label for="lastName">Last name:
-        <input id="lastName" type="text" name="lastName" th:value="*{lastName}">
-    </label><br>
-    <label for="birthDate">Birthdate:
-        <input id="birthDate" type="date" name="birthDate" th:value="*{birthDate}">
-    </label><br>
-    <label for="gender">Gender:
-        <select id="gender" name="gender" th:value="*{gender}">
-            <option value="MALE" th:selected="*{gender == 'MALE'}">Male</option>
-            <option value="FEMALE" th:selected="*{gender == 'FEMALE'}">Female</option>
-        </select>
-    </label><br>
-    <button type="submit">Register</button>
-    <div th:if="${errors}">
-        <p style="color: red" th:each="error: ${errors}" th:text="${error.defaultMessage}">
-            Error message
-        </p>
-    </div>
-</form>
+<div class="wrapper container">
+    <header class="header" th:insert="~{fragment/header::header}"></header>
+    <main class="page page__registration registration-page">
+        <form class="registration-form" th:action="@{/face/users/registration}" th:method="POST" th:object="${user}">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input id="email" type="email" name="email" th:value="*{email}">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input id="password" type="password" name="password" th:value="*{password}">
+            </div>
+            <div class="form-group">
+                <label for="firstName">Name:</label>
+                <input id="firstName" type="text" name="firstName" th:value="*{firstName}">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last name:</label>
+                <input id="lastName" type="text" name="lastName" th:value="*{lastName}">
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Birthdate:</label>
+                <input id="birthDate" type="date" name="birthDate" th:value="*{birthDate}">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" th:value="*{gender}">
+                    <option value="MALE" th:selected="*{gender == 'MALE'}">Male</option>
+                    <option value="FEMALE" th:selected="*{gender == 'FEMALE'}">Female</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-button">Registration</button>
+            <div class="error-container" th:if="${errors}">
+                <p class="error-message" th:each="error: ${errors}" th:text="${error.defaultMessage}">
+                    Error message
+                </p>
+            </div>
+        </form>
+    </main>
+    <footer class="footer" th:insert="~{fragment/footer::footer}"></footer>
+</div>
+
 </body>
 </html>
