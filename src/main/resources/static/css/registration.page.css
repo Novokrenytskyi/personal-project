@@ -1,0 +1,56 @@
+.registration-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #000;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.error-container {
+    margin-top: 10px;
+}
+
+.error-message {
+    color: red;
+}
