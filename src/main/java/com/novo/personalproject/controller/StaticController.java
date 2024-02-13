@@ -4,6 +4,7 @@ import com.novo.personalproject.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -53,30 +54,21 @@ public class StaticController {
         }
     }
 
-    @GetMapping("/media/{variablePart}")
+    @GetMapping("/media/{variablePart:.+}")
     public ResponseEntity<byte[]> getMediaFile(@PathVariable String variablePart) throws IOException {
         ClassPathResource resource = new ClassPathResource("static/media/" + variablePart);
 
-        return imageService.get(variablePart)
-                .map(content -> ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE)
-                .contentLength(content.length)
-                .body(content))
-                .orElseGet(ResponseEntity.notFound()::build);
-
-        /*if (resource.exists()) {
-            byte[] mediaBytes = Files.readAllBytes(Path.of(resource.getURI()));
-            String MediaContent = new String(mediaBytes);
-
-            String mediaFormat = variablePart.split("\\.")[1];
-
-            return ResponseEntity.ok()
-                    .contentType(MediaType.valueOf("image/" + mediaFormat))
-                    .body(MediaContent);
+        if (resource.exists() && resource.isReadable()) {
+            byte[] content = Files.readAllBytes(resource.getFile().toPath());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            headers.setContentLength(content.length);
+            return new ResponseEntity<>(content, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
-        }*/
+        }
     }
+
 
 }
 
