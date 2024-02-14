@@ -38,8 +38,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/face", "/face/users/registration",
                                 "/face/products", "/face/login",
                                 "/login", "/success",
-                                "/v3/api-docs/**", "/swagger-ui/**",
-                                "/resources/static/**", "/api/session").permitAll()
+                                "/resources/static/**", "/api/session")
+                        .permitAll()
                         .anyRequest().authenticated()
                 )
 

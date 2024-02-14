@@ -11,16 +11,18 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ImageService {
-    @Value("${app.image.bucket:src/main/resources/static/media/}")
+public class StaticService {
+
+    @Value("${app.image.bucket:src/main/resources/static/}")
     private final String bucket;
 
     @SneakyThrows
-    public Optional<byte[]> get(String imagePath) {
-        Path fullImagePath = Path.of(bucket, imagePath);
+    public Optional<byte[]> get(String resource) {
+        Path fullImagePath = Path.of(bucket, resource);
 
         return Files.exists(fullImagePath)
                 ? Optional.of(Files.readAllBytes(fullImagePath))
                 : Optional.empty();
     }
+
 }
