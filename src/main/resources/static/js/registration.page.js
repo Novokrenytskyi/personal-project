@@ -1,1 +1,1 @@
-import "./header.module.mjs";
+import "./header.module.js";

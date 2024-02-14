@@ -1,3 +1,3 @@
-import "./header.module.mjs";
-import "./loader.module.mjs";
+import "./header.module.js";
+import "./loader.module.js";
 

@@ -38,7 +38,12 @@ public class SecurityConfiguration {
                         .requestMatchers("/face", "/face/users/registration",
                                 "/face/products", "/face/login",
                                 "/login", "/success",
-                                "/resources/static/**", "/api/session")
+                                "/resources/static/**",
+                                "/api/session",
+                                "/js/**",
+                                "/css/**",
+                                "/media/**"
+                        )
                         .permitAll()
                         .anyRequest().authenticated()
                 )
