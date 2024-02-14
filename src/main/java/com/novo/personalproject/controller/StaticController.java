@@ -33,7 +33,6 @@ public class StaticController {
 
     @GetMapping("/js/{fileName:.+\\.js|.+\\.mjs}")
     public ResponseEntity<String> getJavaScript(@PathVariable String fileName) {
-
         return staticService.get("js/" + fileName)
                 .map(content -> ResponseEntity
                         .status(HttpStatus.OK)

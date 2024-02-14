@@ -1,6 +1,6 @@
 import { getByQuerySelector, moveTo } from "./utils.mjs";
-import "./header.module.mjs";
-import "./loader.module.mjs";
+import "./header.module.js";
+import "./loader.module.js";
 
 const registrationButtons = [
     [getByQuerySelector(".registration-button"), "/face/users/registration"],
