@@ -19,6 +19,7 @@ public class StaticService {
     @SneakyThrows
     public Optional<byte[]> get(String resource) {
         Path fullImagePath = Path.of(bucket, resource);
+
         return Files.exists(fullImagePath)
                 ? Optional.of(Files.readAllBytes(fullImagePath))
                 : Optional.empty();
