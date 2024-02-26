@@ -30,7 +30,10 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation 'org.springframework.data:spring-data-envers'
 	implementation 'org.liquibase:liquibase-core'
-	implementation 'com.backblaze.b2:b2-sdk-core:6.1.1'
+	implementation 'com.google.cloud:google-cloud-storage:2.34.0'
+
+
+
 
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

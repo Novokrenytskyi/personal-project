@@ -20,6 +20,7 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    private String image;
 
     @Enumerated(EnumType.STRING)
     private ProductType productType;

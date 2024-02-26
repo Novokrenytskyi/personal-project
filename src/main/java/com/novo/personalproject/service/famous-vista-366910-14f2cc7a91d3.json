@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "famous-vista-366910",
+  "private_key_id": "14f2cc7a91d32bfd650ced414d5123d7593abdf1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4s/QucsUwC/GH\nTuEkSFqDeNPtPIn2zQ4eZDQ8aBehhOvvb89tMV4YJd6dn3rs6XYOQE6t8maIwedc\nkBLgXC9jRZDnf3fnJ3v+1NWY+GVxozdX4A5JVtQhj6Xc/80W2eBONz0aJmunJa9u\n4P3UvDFbnBQzW2WTyvKFQPEb19lxNimIDnnkeXNTeYE3WGbAD1VqVPmRngqHGbpR\ndZxx6bhRSC7LKWHHsAjYwvhNT9J3Fj1U/qb5HEKJtI+lS19pFniR+icBT5oK5Sy/\nn7SZmIm6N29ZiQ7rks/a+/vFRg2lq+EVKeNFwrbryyMsyshI4araTxsFSZoyPR1T\nQity50udAgMBAAECggEAB4nKqbmj7B/UqffRbwRn800zYw+RNuosDRf8XMnHyx8M\nbQ+EaPm2lCg5g3fekbw+hfrgay+FOUgmq+uyZYdFpNjSPuyAJYZCRIaFuDJNG5v0\ndojttFcPndYJyDEFew0F31NYUlCmnKIIXK9glLXgktNWLLlqdiN2jfM2U/NVi83+\n8+gSSTbZv2OE5vkxFiQYU/jQA8ecmRtEQxbltkCIqb0R7tIRLSnGBWZWfAbBM2j+\nMW3RQD2pdIXEPn8CKK12vVSxxAaBMHnRmgr71wBnvY8RD0M8dnPOEM6h23UmHOlq\nIIG1jIs3zwxrGOCSNuX51tFYcJKg1ZJwOFRSmNYaWQKBgQD23HDoFR8jAhaMMYzJ\n/zIaqoZ/MgHe9bKV3Hh4hQYIjX/DxKjWYxU3MxYE4yQ0biOvuFDUO/qQALXgHhX8\n/XAe3nsoJiBVaLhT8cflYWybh2Y+qV1Q7fc+RPTF+pN2euh4IXytPdRr1no6fHg6\nurEBX11PtUCOGhTEPRB4gycPFQKBgQC/im0AlzrULufMax6D6KNgNpfOFjx+9VAj\nAt0Mdk4l5H5MXGC4pEfSIhBnjDhfcudYYYFfZx7nLo0+chqww+HwDp5CbiUskHfU\nAgVIadhywpeDfll4S7qsNOM7PRghxegKCgRA/U4vTUja+VU/e6bprGiqRtEW/HKL\nBYlaMsCsaQKBgQCof2z9rLUVEy7KwGOF2Q+dDfpBxaNrSS99hQAh20J0AglMWeaY\ndwcbJ16HNXcX5nmrTla1lr7/Hc0GzeJaTa8DEv7jN6roQVNX0PeNhQM54aCTcs0E\nGXmiYjTlEZUn0NrubIUKRuLAPKQvWZhDFf0Nn8c0SdZnaDv2emvMplC5xQKBgAXU\nperNr7nDz8SWQjCLxWVpZAee/6pxt0XJkYcOluRqZznV2g/k2FbaOJueVhz5t3cm\nSLTpw7QP47bR7GQTIm6XU1P8XF9V6n/mq9h/eFpN+CTFlN2nmIAjgANOocxtZNnh\nYi3ESDwCY0RfMKwlDHiyieEdFMJZXvdCbOL1Bo55AoGAefZeFp8RxuZjpnRmLphj\nIRvDNtAqqwhHeWPt3ZObhBlASD8DHPynV9kAaJpbNtZWJQvT8yapscY1VeuAZDGL\nha0tgGpm7dH2S1khZ8GGHeyMg6yMVfskkOA+b/8W2rCBNUNQJ7Gtz3nIfXX+dv6c\nGNLYOd82eYUPp4fL5w0V7hY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "imagestore2@famous-vista-366910.iam.gserviceaccount.com",
+  "client_id": "109951668750911066410",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/imagestore2%40famous-vista-366910.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

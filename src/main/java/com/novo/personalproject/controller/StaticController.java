@@ -1,16 +1,14 @@
 package com.novo.personalproject.controller;
 
+import com.novo.personalproject.service.GoogleCloudService;
 import com.novo.personalproject.service.StaticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -19,6 +17,9 @@ public class StaticController {
 
     @Autowired
     private StaticService staticService;
+
+    @Autowired
+    private GoogleCloudService googleCloudService;
 
     @GetMapping("/css/{fileName:.+\\.css}")
     public ResponseEntity<String> getCss(@PathVariable String fileName) {
@@ -53,6 +54,21 @@ public class StaticController {
                         .body(content))
                 .orElseGet(ResponseEntity.notFound()::build);
 
+    }
+
+    @GetMapping ("/upload")
+    public ResponseEntity<String> getMediaFile(@RequestParam("file" ) MultipartFile file) {
+
+        try {
+            String result = googleCloudService.uploadFile(file);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(result);
+
+        } catch (Exception e) {
+            return ResponseEntity.notFound()
+                    .build();
+        }
     }
 
 

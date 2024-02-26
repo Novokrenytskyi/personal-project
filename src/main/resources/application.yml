@@ -37,12 +37,12 @@ spring:
 #      oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
 #     path: /swagger-ui.html
 
-back-blaze:
-   b2:
-      applicationKeyId: 005c77128b8938e0000000001
-      applicationKey: K005rzLGMOBbGqTiEN/0vkdPz/V6SO0
-      bucketName: personal-project-images
-      userAgent: personal-project
+google-cloud:
+   project-id: 109951668750911066410
+   bucket-name: imagestore2
+   credentials-path: src/main/java/com/novo/personalproject/service/famous-vista-366910-14f2cc7a91d3.json
+   public-url: https://storage.googleapis.com/imagestore2/
+
 
 
 logging:

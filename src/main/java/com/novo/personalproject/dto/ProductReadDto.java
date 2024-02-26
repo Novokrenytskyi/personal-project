@@ -13,9 +13,11 @@ public class ProductReadDto {
 
     String name;
 
+    String image;
+
     String description;
 
-    BigDecimal price;
-
     ProductType productType;
+
+    BigDecimal price;
 }
