@@ -1,6 +1,6 @@
 import "./header.module.js";
 import "./loader.module.js";
-import {fetchData, getByQuerySelector, moveTo} from "./utils.mjs";
+import {fetchData, getByQuerySelector, moveTo} from "./utils.js";
 
 const editButton = getByQuerySelector(".edit-button");
 const deleteButton = getByQuerySelector(".delete-button");

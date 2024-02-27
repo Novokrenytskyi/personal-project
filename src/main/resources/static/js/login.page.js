@@ -1,4 +1,4 @@
-import { getByQuerySelector, moveTo } from "./utils.mjs";
+import { getByQuerySelector, moveTo } from "./utils.js";
 import "./header.module.js";
 import "./loader.module.js";
 
