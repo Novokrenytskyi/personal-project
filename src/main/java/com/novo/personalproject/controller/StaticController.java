@@ -23,7 +23,6 @@ public class StaticController {
 
     @GetMapping("/css/{fileName:.+\\.css}")
     public ResponseEntity<String> getCss(@PathVariable String fileName) {
-        System.out.println("CSS CONTROLLER" + ":" + fileName);
         return staticService.get("css/" + fileName)
                 .map(content -> ResponseEntity
                         .status(HttpStatus.OK)
