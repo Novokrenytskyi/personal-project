@@ -1,0 +1,27 @@
+.admin-page__box {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.admin-page__box h2 {
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+
+
+.admin-page__box-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.admin-page__button-add-product:hover,
+.admin-page__button-users:hover,
+.admin-page__button-products:hover {
+    outline: 1px solid black;
+}

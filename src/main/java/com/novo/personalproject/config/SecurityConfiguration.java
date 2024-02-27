@@ -37,6 +37,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/face", "/face/users/registration",
                                 "/face/products", "/face/login",
+//                                TODO: Remove these paths
+                                "/face/admin",
+                                "/face/product",
                                 "/login", "/success",
                                 "/resources/static/**",
                                 "/api/session",

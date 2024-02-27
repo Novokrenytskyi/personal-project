@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="/css/reset.css" rel="stylesheet">
+    <link type="text/css" href="/css/common.css" rel="stylesheet">
+    <link type="text/css" href="/css/admin.page.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="module" src="/js/main.js" defer></script>
+    <title>Admin panel</title>
+</head>
+<body class="load">
+<div class="wrapper container">
+    <header class="header" th:insert="~{fragment/header::header}"></header>
+    <main class="page page__admin admin-page">
+        <div class="admin-page__wrapper">
+            <div class="admin-page__box">
+                <h2>Admin Actions</h2>
+                <div class="admin-page__box-buttons">
+                    <button class="button admin-page__button-add-product">Add new product</button>
+                    <button class="button admin-page__button-users">Users</button>
+                    <button class="button admin-page__button-products">Products</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer class="footer" th:insert="~{fragment/footer::footer}"></footer>
+</div>
+<div class="loader"></div>
+</body>
+</html>

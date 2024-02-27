@@ -37,4 +37,14 @@ public class FaceController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+//    TODO: Remove or rewrite these endpoints
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "page/admin";
+    }
+
+    @GetMapping("/product")
+    public String productPage() {
+        return "page/product";
+    }
 }
