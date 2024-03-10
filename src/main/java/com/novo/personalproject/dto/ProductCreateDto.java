@@ -25,9 +25,9 @@ public class ProductCreateDto {
     String description;
 
     @NotNull(message = "Field cannot be empty")
-    @Digits(integer = 10, fraction = 2, message = "Incorrect number of digits after dot")
     ProductType productType;
 
     @NotNull(message = "Field cannot be empty")
+    @Digits(integer = 10, fraction = 2, message = "Incorrect number of digits after dot")
     BigDecimal price;
 }

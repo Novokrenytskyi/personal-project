@@ -10,13 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.context.SecurityContext;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +50,14 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createProduct(@RequestBody @Validated ProductCreateDto productCreateDto,
+    public ResponseEntity<?> createProduct(@ModelAttribute @Validated ProductCreateDto productCreateDto,
                                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = new ArrayList<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.add(error.getDefaultMessage());
             }
+
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(errors);
@@ -67,12 +67,14 @@ public class ProductController {
         if (product.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .build();
+                    .body(product);
         } else {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .build();
         }
     }
+
+
 }
 

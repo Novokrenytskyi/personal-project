@@ -1,32 +1,32 @@
 spring:
-   datasource:
-      driverClassName: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5433/postgres
-      username: postgres
-      password: pass
-   jpa:
-      properties.hibernate:
-         show_sql: true
-         format_sql: true
-         hbm2ddl.auto: validate
-      open-in-view: false
-   mvc:
-#      static-path-pattern: /**
-      format:
-        date: iso
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: pass
+  jpa:
+    properties.hibernate:
+      show_sql: true
+      format_sql: true
+      hbm2ddl.auto: validate
+    open-in-view: false
+  mvc:
+    #      static-path-pattern: /**
+    format:
+      date: iso
 
-   security:
-     oauth2:
-       client:
-          registration:
-            google:
-               client-id: 886982415727-tvhlqfa23nbr2igj81vctpjqajetu8ke.apps.googleusercontent.com
-               client-secret: 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
-               redirect-uri: http://localhost:8080/login/oauth2/code/google
-               scope: openid,email,profile
-               authorization-grant-type: authorization_code
-               client-name: Google
-               client-authentication-method: client_secret_post
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 886982415727-tvhlqfa23nbr2igj81vctpjqajetu8ke.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            scope: openid,email,profile
+            authorization-grant-type: authorization_code
+            client-name: Google
+            client-authentication-method: client_secret_post
 
 #springdoc:
 #   swagger-ui:
@@ -38,18 +38,18 @@ spring:
 #     path: /swagger-ui.html
 
 google-cloud:
-   project-id: 109951668750911066410
-   bucket-name: imagestore2
-   credentials-path: src/main/java/com/novo/personalproject/service/famous-vista-366910-14f2cc7a91d3.json
-   public-url: https://storage.googleapis.com/imagestore2/
+  project-id: 109951668750911066410
+  bucket-name: imagestore2
+  credentials-path: src/main/java/com/novo/personalproject/service/famous-vista-366910-14f2cc7a91d3.json
+  public-url: https://storage.googleapis.com/imagestore2/
 
 
 
 logging:
-   level:
-      org:
-         springframework:
-            security: trace
+  level:
+    org:
+      springframework:
+        security: trace
 
 
 

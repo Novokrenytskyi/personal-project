@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -33,22 +34,24 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-
+//                TODO: Update it after testing
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/face", "/face/users/registration",
-                                "/face/products", "/face/login",
+                                .requestMatchers("/face", "/face/users/registration",
+                                        "/face/products", "/face/login",
 //                                TODO: Remove these paths
-                                "/face/admin",
-                                "/face/product",
-                                "/login", "/success",
-                                "/resources/static/**",
-                                "/api/session",
-                                "/js/**",
-                                "/css/**",
-                                "/media/**"
-                        )
-                        .permitAll()
-                        .anyRequest().authenticated()
+                                        "/face/admin",
+                                        "/face/product",
+
+                                        "/login", "/success",
+                                        "/resources/static/**",
+                                        "/api/session",
+                                        "/js/**",
+                                        "/css/**",
+                                        "/media/**"
+                                )
+                                .permitAll()
+                                .anyRequest().authenticated()
                 )
 
                 .formLogin(login -> login

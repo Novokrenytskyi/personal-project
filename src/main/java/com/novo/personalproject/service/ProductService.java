@@ -36,6 +36,7 @@ public class ProductService {
                 .map(productReadMapper::map);
     }
 
+    @Transactional
     public Optional<ProductReadDto> createProduct(ProductCreateDto dto) {
 
         return Optional.of(productRepository.save(productCreateMapper.map(dto)))
