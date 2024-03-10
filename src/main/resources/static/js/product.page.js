@@ -71,7 +71,7 @@ async function submitForm(url, data) {
 
 }
 
-inputImage.addEventListener("change", function() {
+inputImage.addEventListener("change", () => {
     const file = this.files[0];
 
     if (file) {
@@ -96,6 +96,16 @@ function clearForm() {
     inputProductType.selectedIndex = 0;
     inputPrice.value = '';
 }
+
+inputPrice.addEventListener("input", () => {
+    const isValid = this.value.match(/^\d\.*/g);
+
+    if(!isValid) {
+        this.value = "";
+        showNotification("Enter only the numbers ", "error");
+    }
+
+});
 
 const API_URL = 'http://localhost:8080/api/products';
 
