@@ -182,3 +182,60 @@ body.load .wrapper {
 }
 
 /*==========================================*/
+/* Notification */
+
+.notification {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.notification.hidden {
+    display: none;
+}
+
+.notification__text {
+    margin: 0;
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #333;
+}
+
+@keyframes notification-appear {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+.notification.error {
+    background-color: #ffcccc;
+    border-color: #ff6666;
+}
+
+.notification.success {
+    background-color: #9bff9b;
+    border-color: #66ff66;
+}
+
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
