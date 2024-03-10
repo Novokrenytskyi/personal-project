@@ -71,7 +71,7 @@ async function submitForm(url, data) {
 
 }
 
-inputImage.addEventListener("change", () => {
+inputImage.addEventListener("change", function() {
     const file = this.files[0];
 
     if (file) {
@@ -97,7 +97,7 @@ function clearForm() {
     inputPrice.value = '';
 }
 
-inputPrice.addEventListener("input", () => {
+inputPrice.addEventListener("input", function() {
     const isValid = this.value.match(/^\d\.*/g);
 
     if(!isValid) {
