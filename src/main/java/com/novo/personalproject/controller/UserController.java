@@ -7,17 +7,22 @@ import com.novo.personalproject.error.EmailAlreadyExistsException;
 import com.novo.personalproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/face/users")
@@ -31,13 +36,10 @@ public class UserController {
 
     @GetMapping()
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public String getUsers(Model model) {
+    public ResponseEntity<List<UserReadDto>> getUsers() {
         List<UserReadDto> users = userService.getAllUsers();
 
-        if(users != null) {
-            model.addAttribute("users", users);
-            return "page/users";
-        } else throw  new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
@@ -54,11 +56,11 @@ public class UserController {
         return "page/registration";
     }
 
-    @PostMapping ("/registration")
+    @PostMapping("/registration")
     public String createUser(@ModelAttribute("user") @Validated UserCreateEditDto userCreateEditDto,
-                               BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
-        if(bindingResult.hasErrors()) {
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("user", userCreateEditDto);
             return "redirect:/face/users/registration";
@@ -76,38 +78,40 @@ public class UserController {
         return "page/success";
     }
 
-    @GetMapping("/{id}/edit")
-    public String getEditForm(@PathVariable("id") Long id, Model model) {
-        return userService.findUserById(id).
-                map(user -> {
-                    model.addAttribute("user", user);
-                    return "page/edit-form";
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-    }
 
     @PatchMapping("/{id}")
-    public String editUser(@PathVariable Long id, @ModelAttribute("user") @Validated UserEditDto user,
-                           BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+    public ResponseEntity<?> editUser(@PathVariable Long id, @ModelAttribute("user") @Validated UserEditDto user,
+                                      BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = new ArrayList<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.add(error.getDefaultMessage());
+            }
 
-        if(bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("user", user);
-            return "redirect:/face/users/{id}/edit";
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(errors);
         }
 
-       return userService.updateProfile(id, user)
-               .map(it -> "redirect:/face/profile")
-               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
+        return userService.updateProfile(id, user)
+                .map(dto -> ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(dto))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .build());
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> deleteUser(@PathVariable(value = "id") Long id) {
         if (!userService.deleteUser(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        } else {
+            return ResponseEntity
+                    .ok()
+                    .build();
         }
-        return "redirect:/users";
     }
 }

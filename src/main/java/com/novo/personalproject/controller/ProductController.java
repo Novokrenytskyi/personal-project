@@ -42,10 +42,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public String getProduct(Model model, @PathVariable(name = "id") Integer id) {
-        ProductReadDto productDto = productService.findProductById(id).get();
-        model.addAttribute("productDto", productDto);
-        return "page/product";
+    public ResponseEntity<?> getProduct(@PathVariable(name = "id") Integer id) {
+
+        return productService.findProductById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .notFound()
+                        .build());
     }
 
     @PostMapping()

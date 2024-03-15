@@ -42,7 +42,7 @@ public class SecurityConfiguration {
 //                                TODO: Remove these paths
                                         "/face/admin",
                                         "/face/product",
-
+                                            "face/users/**",
                                         "/login", "/success",
                                         "/resources/static/**",
                                         "/api/session",

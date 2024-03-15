@@ -1,11 +1,9 @@
 package com.novo.personalproject.controller;
 
-import com.novo.personalproject.dto.UserInfo;
 import com.novo.personalproject.dto.UserReadDto;
 import com.novo.personalproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

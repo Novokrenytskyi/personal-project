@@ -2,4 +2,4 @@
 
 -- changeset novokren:1
 alter table product
-    add column image varchar;
+    add column if not exists image varchar;
