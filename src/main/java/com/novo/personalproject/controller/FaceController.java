@@ -8,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -46,5 +48,12 @@ public class FaceController {
     @GetMapping("/product")
     public String productPage() {
         return "page/product";
+    }
+
+    @GetMapping("/edit")
+    public String getEditForm(@RequestParam("id") Long id) {
+        System.out.println(id);
+         return "page/edit-form";
+
     }
 }
