@@ -39,6 +39,10 @@
 .form-group select {
     cursor: pointer;
 }
+.form-group input[type="file"] {
+    position: relative;
+    display: block;
+}
 
 .product-form button[type="submit"] {
     background-color: #008cba;
@@ -51,4 +55,24 @@
 
 .product-form button[type="submit"]:hover {
     background-color: #00759a;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.btn-danger {
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    background-color: initial;
+    cursor: pointer;
+    color: white;
+    transition: color 0.2s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.btn-danger:hover {
+    color: black;
+    transform: scale(1.3);
 }

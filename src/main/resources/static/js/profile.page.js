@@ -1,44 +1,34 @@
 import "./header.module.js";
 import "./loader.module.js";
-import {fetchData, getByQuerySelector, moveTo} from "./utils.js";
+import {getByQuerySelector, moveTo} from "./utils.js";
+import {getUserSession} from "./user.api.js";
 
 const editButton = getByQuerySelector(".edit-button");
-const deleteButton = getByQuerySelector(".delete-button");
-const usersButton = getByQuerySelector(".users-button");
 const shoppingCartButton = getByQuerySelector(".shopping-cart-button");
 
 const buttons = [
     [
-        editButton, ""
-    ],
-    [
-        deleteButton, ""
-    ],
-    [
-        usersButton, "/users",
+        editButton, "/face/edit"
     ],
     [
         shoppingCartButton, ""
     ]
 ]
 
-async function getUserRole() {
-    try {
-        const data = await fetchData('http://localhost:8080/api/session');
-        if (data.userRole !== "[ADMIN]") {
-            deleteButton.remove();
-            usersButton.remove();
-        }
-
-        buttons.forEach(([button, href]) => {
-            button.addEventListener("click", () => {
-                moveTo(href);
-            })
-        })
-
-    } catch (error) {
-        console.error('Error occurred:', error);
+try {
+    const data = await getUserSession();
+    if(!data) {
+        throw new Error("Something went wrong!")
     }
-}
 
-getUserRole();
+    buttons.forEach(([button, href]) => {
+        button.addEventListener("click", () => {
+            const localHref = href === "/face/edit" ? `${href}?id=${data.id}` : href;
+            moveTo(localHref);
+        })
+    })
+
+} catch (error) {
+    moveTo("face/");
+    console.error('Error occurred:', error);
+}

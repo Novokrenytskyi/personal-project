@@ -1,0 +1,46 @@
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(256, 256, 256, 0.5);
+    color: #000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.users-table th,
+.users-table td {
+    padding: 12px;
+    text-align: left;
+    font-family: Roboto;
+}
+
+.users-table th {
+    background-color: #f8f9fa;
+}
+
+.users-table .btn-delete {
+    background-color: #d9534f;
+}
+
+.users-table .btn-edit {
+    background-color: #337ab7;
+}
+
+.users-table .btn-delete,
+.users-table .btn-edit {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+    font-family: Roboto;
+}
+
+.users-table .btn-delete:hover,
+.users-table .btn-edit:hover {
+    background-color: #fff;
+    color: black;
+}
+
+

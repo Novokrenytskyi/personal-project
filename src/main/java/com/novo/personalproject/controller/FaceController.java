@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class FaceController {
 
     @GetMapping("/profile")
     public String getProfile(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-       return userService.findUserByEmail(userDetails.getUsername())
+        return userService.findUserByEmail(userDetails.getUsername())
                 .map(user -> {
                     model.addAttribute("user", user);
                     return "page/user";
@@ -39,8 +40,9 @@ public class FaceController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-//    TODO: Remove or rewrite these endpoints
     @GetMapping("/admin")
+    //    TODO: Fix page access
+    @PreAuthorize("hasRole('ADMIN')")
     public String adminPage() {
         return "page/admin";
     }
@@ -50,10 +52,20 @@ public class FaceController {
         return "page/product";
     }
 
+
+    @GetMapping("/all-users")
+//    TODO: Fix page access
+    @PreAuthorize("hasRole('ADMIN')")
+    public String usersPage() {
+        return "page/users";
+    }
+
     @GetMapping("/edit")
     public String getEditForm(@RequestParam("id") Long id) {
-        System.out.println(id);
-         return "page/edit-form";
+        if (id == null || id < 0) {
+            return "redirect:/face";
+        }
+        return "page/edit-form";
 
     }
 }

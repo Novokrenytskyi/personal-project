@@ -40,9 +40,8 @@ public class SecurityConfiguration {
                                 .requestMatchers("/face", "/face/users/registration",
                                         "/face/products", "/face/login",
 //                                TODO: Remove these paths
-                                        "/face/admin",
                                         "/face/product",
-                                            "face/users/**",
+                                        "/face/users/**",
                                         "/login", "/success",
                                         "/resources/static/**",
                                         "/api/session",

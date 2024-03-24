@@ -1,29 +1,44 @@
-const userEmail = document.querySelector(".logout-form__email");
-const logoutButton = document.querySelector(".logout-form__button");
-const profileButton = document.querySelector(".button__profile");
-const loginButton = document.querySelector(".button__login");
+import {setLoader} from "./utils.js";
+import {getUserSession} from "./user.api.js"
 
-const isNotAuth = userEmail.textContent === "anonymousUser";
+let user;
+try {
+    setLoader(true);
+    user = await getUserSession();
 
-const isLoginPage = window.location.pathname === "/face/login";
-const isProfilePage = window.location.pathname === "/face/profile";
-
-const removeElement = element => {
-    if (element) {
-        element.remove();
-    }
-};
-
-if (isNotAuth) {
-    removeElement(userEmail);
-    removeElement(logoutButton);
-    removeElement(profileButton);
-} else if (isLoginPage || isProfilePage) {
-    removeElement(loginButton);
+} catch (error) {
+    new Error("Something went wrong!")
+} finally {
+    setLoader(false);
 }
 
-if (isProfilePage) {
-    removeElement(profileButton);
+function setLoggedInState() {
+    document.querySelector(".logout-form__email").classList.remove('hidden');
+    document.querySelector(".logout-form__email").textContent = user.email;
+    document.querySelector(".logout-form__button").classList.remove('hidden');
+    document.querySelector(".button__profile").classList.remove('hidden');
+    document.querySelector(".button__login").classList.add('hidden');
+}
+
+function setLoggedOutState() {
+    document.querySelector(".logout-form__email").classList.add('hidden');
+    document.querySelector(".logout-form__button").classList.add('hidden');
+    document.querySelector(".button__profile").classList.add('hidden');
+    document.querySelector(".button__login").classList.remove('hidden');
 }
 
 
+function setProfilePageState() {
+    document.querySelector(".button__profile").classList.add('hidden');
+}
+
+
+if (!user) {
+    setLoggedOutState();
+} else {
+    setLoggedInState();
+}
+
+if (window.location.pathname === "/face/profile") {
+    setProfilePageState();
+}

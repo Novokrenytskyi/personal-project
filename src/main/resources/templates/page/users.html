@@ -2,16 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Users</title>
+    <title>All Users</title>
+    <link type="text/css" href="/css/reset.css" rel="stylesheet">
+    <link type="text/css" href="/css/common.css" rel="stylesheet">
+    <link type="text/css" href="/css/users.page.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="module" src="/js/users.page.js" defer></script>
 </head>
-<body>
-<div th:insert="~{fragment::header}"></div>
+<body class="load">
+<div class="wrapper container">
+    <header class="header" th:insert="~{fragment/header::header}"></header>
+    <main class="page page__users users-page">
+        <div class="users__wrapper">
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Birthdate</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody class="users-table__body">
+                <!--table content-->
+                </tbody>
+            </table>
 
-<br>
+        </div>
 
-<div th:each="user : ${users}">
-    <a th:href ="@{/users/{id}(id=${user.getId()})}" th:text="${user.email}">user</a>
+    </main>
+    <footer class="footer" th:insert="~{fragment/footer::footer}"></footer>
+    <div class="loader"></div>
+    <div class="notification hidden">
+        <p class="notification__text"></p>
+    </div>
 </div>
-<br/>
 </body>
 </html>
