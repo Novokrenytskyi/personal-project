@@ -42,40 +42,14 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/{id}")
-    public String getUser(Model model, @PathVariable(value = "id") Long id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getUserById(@PathVariable(name = "id") Long id) {
+
         return userService.findUserById(id)
-                .map(user -> {
-                    model.addAttribute("user", user);
-                    return "user";
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    }
-
-    @GetMapping("/registration")
-    public String registration(@ModelAttribute("user") UserCreateEditDto user) {
-        return "page/registration";
-    }
-
-    @PostMapping("/registration")
-    public String createUser(@ModelAttribute("user") @Validated UserCreateEditDto userCreateEditDto,
-                             BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("user", userCreateEditDto);
-            return "redirect:/face/users/registration";
-        }
-
-        try {
-            userService.saveUser(userCreateEditDto);
-        } catch (EmailAlreadyExistsException ex) {
-            bindingResult.addError(new ObjectError("userCreateEditDto", ex.getMessage()));
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("user", userCreateEditDto);
-            return "redirect:/face/users/registration";
-        }
-        System.out.println("controller after saveUser");
-        return "page/success";
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity
+                        .notFound()
+                        .build());
     }
 
 
@@ -113,5 +87,32 @@ public class UserController {
                     .ok()
                     .build();
         }
+    }
+
+
+    @GetMapping("/registration")
+    public String registration(@ModelAttribute("user") UserCreateEditDto user) {
+        return "page/registration";
+    }
+
+    @PostMapping("/registration")
+    public String createUser(@ModelAttribute("user") @Validated UserCreateEditDto userCreateEditDto,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("user", userCreateEditDto);
+            return "redirect:/face/users/registration";
+        }
+
+        try {
+            userService.saveUser(userCreateEditDto);
+        } catch (EmailAlreadyExistsException ex) {
+            bindingResult.addError(new ObjectError("userCreateEditDto", ex.getMessage()));
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("user", userCreateEditDto);
+            return "redirect:/face/users/registration";
+        }
+        return "page/success";
     }
 }

@@ -1,0 +1,49 @@
+.edit-form {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 500px; /* Можно поменять по желанию */
+    margin: 30px auto;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.1); /* Легкая тень */
+}
+
+.edit-info .info-item {
+    margin-bottom: 15px;
+}
+
+.edit-info label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+.edit-info input[type="text"],
+.edit-info input[type="email"],
+.edit-info input[type="date"],
+.edit-info select{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.edit-actions {
+    text-align: center;
+}
+
+.edit-actions button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-actions button[type="submit"]:hover {
+    background-color: #2980b9;
+}

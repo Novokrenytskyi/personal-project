@@ -1,3 +1,7 @@
+import {getUserSession} from "./user.api.js"
+
+const BASE_URL = "http://localhost:8080/";
+
 export function getByQuerySelector(selector) {
     if (!selector || typeof selector !== "string") return null;
     return document.querySelector(selector);
@@ -41,4 +45,22 @@ export function showNotification(text, status) {
         notificationElement.style.animation = '';
     }, 3000);
 
+}
+
+export function setLoader(flag) {
+
+    if (flag) {
+        document.body.classList.add("load");
+    } else {
+        document.body.classList.remove("load");
+    }
+}
+
+export async function hasAdminRole() {
+    const response = await getUserSession();
+    if(!!response){
+        return response.role === "ADMIN";
+    }else {
+        return null;
+    }
 }

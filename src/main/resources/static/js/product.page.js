@@ -1,9 +1,10 @@
 import "./loader.module.js";
 import "./header.module.js";
-import {showNotification} from "./utils.js";
+import {showNotification, setLoader} from "./utils.js";
 
 const form = document.querySelector('.product-form');
 const imagePreview = document.getElementById("image-preview");
+const clearButton = document.getElementById("clear-image");
 
 const inputName = document.querySelector('#name');
 const inputDescription = document.querySelector('#description');
@@ -61,9 +62,9 @@ async function submitForm(url, data) {
     };
 
     try {
-        document.body.classList.add("load");
+        setLoader(true);
         const response = await fetch(url, config);
-        document.body.classList.remove("load");
+        setLoader(false);
         return response;
     } catch (error) {
         throw new Error('Error submitting form');
@@ -71,13 +72,14 @@ async function submitForm(url, data) {
 
 }
 
-inputImage.addEventListener("change", function() {
+inputImage.addEventListener("change", function () {
     const file = this.files[0];
+
 
     if (file) {
         const reader = new FileReader();
 
-        reader.addEventListener("load", function() {
+        reader.addEventListener("load", function () {
             imagePreview.src = this.result;
             imagePreview.style.display = "block";
         });
@@ -95,17 +97,23 @@ function clearForm() {
     inputImage.value = '';
     inputProductType.selectedIndex = 0;
     inputPrice.value = '';
+
+    imagePreview.style.display = 'none';
 }
 
-inputPrice.addEventListener("input", function() {
+inputPrice.addEventListener("input", function () {
     const isValid = this.value.match(/^\d\.*/g);
 
-    if(!isValid) {
+    if (!isValid) {
         this.value = "";
         showNotification("Enter only the numbers ", "error");
     }
 
 });
 
+clearButton.addEventListener("click", () => {
+    inputImage.value = '';
+    imagePreview.style.display = 'none';
+})
 const API_URL = 'http://localhost:8080/api/products';
 

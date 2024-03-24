@@ -3,52 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit form</title>
+    <link type="text/css" href="/css/reset.css" rel="stylesheet">
+    <link type="text/css" href="/css/common.css" rel="stylesheet">
+    <link type="text/css" href="/css/edit.page.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script type="module" src="/js/edit.page.js" defer></script>
 </head>
-<body> Hello
-<!--<form th:method="PATCH" th:action="@{'/face/users/'+ ${user.getId()}}" th:object="${user}">
+<body class="load">
+<div class="wrapper container">
+    <header class="header" th:insert="~{fragment/header::header}"></header>
+    <main class="page page__edit edit-page">
+        <div class="edit-page__wrapper">
+            <form class="edit-form">
+                <div class="edit-info">
+                    <div class="info-item">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="info-value" required>
+                    </div>
+                    <div class="info-item">
+                        <label for="firstName">Name:</label>
+                        <input type="text" id="firstName" name="firstName" class="info-value" required>
+                    </div>
+                    <div class="info-item">
+                        <label for="firstName">Last name:</label>
+                        <input type="text" id="lastName" name="lastName" class="info-value" required>
+                    </div>
+                    <div class="info-item">
+                        <label for="birthDate">Birthdate:</label>
+                        <input type="date" id="birthDate" name="birthDate" class="info-value" required>
+                    </div>
+                    <div class="info-item">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" name="gender" class="info-value" required>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="edit-actions">
+                    <button class="edit-actions__button" type="submit">Обновить</button>
+                </div>
+            </form>
+        </div>
 
-  <label for="firstName">Name:</label>
-  <input type="text" id="firstName" name="firstName" th:field="*{firstName}" />
-
-  <br>
-
-  <label for="lastName">Last Name:</label>
-  <input type="text" id="lastName" name="lastName" th:field="*{lastName}" />
-
-  <br>
-
-  <label for="email">Email:</label>
-  <input type="text" id="email" name="email" th:field="*{email}">
-
-  <br>
-
-  <label for="birthDate">Birthdate:</label>
-  <input type="date" id="birthDate" name="birthDate" th:field="*{birthDate}" />
-
-  <br>
-
-  <label for="gender">Gender:</label>
-  <select id="gender" name="gender">
-    <option value="MALE">Male</option>
-    <option value="FEMALE">Female</option>
-  </select>
-
-  <br>
-
-  &lt;!&ndash;<label for="role">Role:</label>
-  <select id="role" name="role">
-    <option value="ADMIN">Admin</option>
-    <option value="USER">User</option>
-  </select>&ndash;&gt;
-
-  <br>
-
-  <button type="submit">Update</button>
-  <div th:if="${errors}">
-    <p style="color: red" th:each="error: ${errors}" th:text="${error.defaultMessage}">
-      Error message
-    </p>
-  </div>
-</form>-->
+    </main>
+    <footer class="footer" th:insert="~{fragment/footer::footer}"></footer>
+    <div class="loader"></div>
+    <div class="notification hidden">
+        <p class="notification__text"></p>
+    </div>
+</div>
 </body>
 </html>

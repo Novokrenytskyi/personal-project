@@ -8,7 +8,7 @@
         <a class="button button__products" href="/face/products">Products</a>
     </div>
     <form class="header__logout-form logout-form" th:action="@{/logout}" method="POST">
-        <span class="logout-form__email" th:text="${#authentication.name}">Email</span>
+        <span class="logout-form__email"></span>
         <button class="button logout-form__button" type="submit">Logout</button>
     </form>
 </div>
